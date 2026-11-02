@@ -1,10 +1,103 @@
-# Codex career skills
+# Codex 求职准备技能
 
-Reusable Codex skills for technical resume readiness and mock interview practice.
+这个仓库包含两个可组合使用的 Codex skill，用于技术岗位的简历准备和模拟面试。默认面向后端、大模型应用开发和其他软件工程岗位，也可以根据具体 JD 调整。
 
-## Included skills
+## 包含的技能
 
-- `skills/resume-readiness-score`: create, tailor, and score technical resumes with evidence, JD matching, ATS checks, bullet rewriting, and version planning.
-- `skills/mock-interview-coach`: run one-question-at-a-time mock interviews with adaptive follow-ups, evidence-based scoring, and retest tasks.
+### `resume-readiness-score`
 
-Each skill is self-contained and includes its own `SKILL.md`, UI metadata, and references.
+用于制作、定制和审查技术简历。它会把简历中的经历拆成可验证的证据，并分别检查：
+
+- 项目是否有清楚的业务场景、输入输出和使用方；
+- 候选人的个人贡献、团队边界和项目来源；
+- 技术栈、关键设计、技术选型和项目迭代；
+- JD 硬性要求、核心职责、重要关键词和真实经历匹配度；
+- ATS 文本解析、标准栏目、文件格式和提交命名；
+- Bullet 是否包含行动、技术内容、问题、结果或验证方式；
+- Master Resume、岗位版本和公司版本之间的版本关系。
+
+它可以按不同模式工作：
+
+- `evidence-score`：按业务、贡献、技术、迭代和结果评分；
+- `jd-tailor`：根据具体岗位调整 Summary、技能顺序、项目顺序和经历表述；
+- `bullet-rewrite`：把职责描述改成有行动和证据的项目/实习 Bullet；
+- `ats-check`：检查 ATS 可解析性和关键词匹配；
+- `version-plan`：规划 Master Resume、岗位版本和投递记录。
+
+输出会区分“没写清楚”“尚未完成”“面试待验证”，不会把关键词数量直接当成技术能力，也不会虚构客户、上线经历、用户反馈或指标。
+
+### `mock-interview-coach`
+
+用于基于真实简历和目标岗位进行互动模拟面试。它默认一次只问一个问题，根据回答继续追问，重点验证：
+
+- 业务问题和验收标准；
+- 自己负责的模块与团队边界；
+- 技术主链路、技术选型和实现细节；
+- 失败处理、排障、迭代和结果验证；
+- 简历中写出的技术是否能被具体解释。
+
+支持两种模式：
+
+- **严格模式**：先独立回答，结束后统一评分和复盘；
+- **陪练模式**：回答后即时指出缺口，给提示并安排重答。
+
+复盘会给出覆盖率、局部或参考分、原答证据、待补内容和下一次复测标准。没有被问到的能力会标为“未评估”，不会因为一次答不上来就判定所有技能都不会。
+
+## 推荐使用流程
+
+1. 先准备一份 Master Resume，记录所有真实经历、项目事实和技能边界。
+2. 使用 `resume-readiness-score` 进行经验证据评分，找出主项目和技能描述的缺口。
+3. 如果有具体 JD，再运行 JD 定制和 ATS 检查，生成对应岗位版本。
+4. 使用 `mock-interview-coach`，并明确告诉它当前使用的简历版本。
+5. 将面试中确认过的新事实和结果核实后回写 Master Resume，再生成下一版投递稿。
+
+## 安装
+
+将需要的 skill 文件夹复制到 Codex skills 目录：
+
+```text
+<CODEX_HOME>/skills/resume-readiness-score
+<CODEX_HOME>/skills/mock-interview-coach
+```
+
+Windows 用户通常可以使用：
+
+```text
+C:\Users\<用户名>\.codex\skills\
+```
+
+如果设置了 `CODEX_HOME`，以该变量指向的目录为准。每个 skill 文件夹都包含自己的 `SKILL.md`、`agents/openai.yaml` 和 `references/`，不需要额外安装依赖。
+
+## 调用示例
+
+制作并评分：
+
+```text
+$resume-readiness-score
+请根据这个目标岗位制作我的技术简历，分别给出经验证据分、JD 匹配分和 ATS 兼容分，并列出投递前必须补齐的点。
+```
+
+只检查 ATS 和关键词：
+
+```text
+$resume-readiness-score
+请只检查这份简历的 ATS 兼容性、JD 关键词覆盖和缺失证据。
+```
+
+改写项目经历：
+
+```text
+$resume-readiness-score
+请把我的项目经历改写成技术岗位 Bullet，并标出每条还缺少哪些真实事实或验证结果。
+```
+
+开始模拟面试：
+
+```text
+$mock-interview-coach
+请根据我的“大模型应用开发版简历”和目标 JD 开始模拟面试，一次问一题，结束后评分复盘。
+```
+
+## 事实与隐私原则
+
+这些 skill 只应使用候选人提供或明确确认的事实。个人项目、科研、竞赛和开源经历不会被自动判定为无效，但必须准确写明来源、贡献和验证方式。没有数字时可以使用规模、样本、测试、运行记录或定性结果；不能为了满足简历模板而估算或编造指标。
