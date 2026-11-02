@@ -1,0 +1,5 @@
+# Ignore local editor and runtime files
+.vscode/
+.idea/
+*.log
+*.tmp

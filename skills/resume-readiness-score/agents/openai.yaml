@@ -1,0 +1,4 @@
+interface:
+  display_name: "简历制作与评分"
+  short_description: "按证据、JD 匹配与 ATS 规则制作技术简历并评分"
+  default_prompt: "请使用 $resume-readiness-score，根据目标岗位制作或修改我的简历，分别检查证据、JD 匹配、ATS 和面试可解释度。"

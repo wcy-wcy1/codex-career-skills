@@ -1,0 +1,4 @@
+interface:
+  display_name: "模拟面试与复盘"
+  short_description: "围绕真实简历逐题提问、追问与评分，定位知识缺口并安排复测"
+  default_prompt: "请使用 $mock-interview-coach，根据我的简历和目标岗位开始模拟面试，一次问一题，结束后评分复盘。"
